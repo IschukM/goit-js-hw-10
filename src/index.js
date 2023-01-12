@@ -15,7 +15,7 @@ inputEl.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 function onInputChange(e) {
   outputClear();
   if (e.target.value.trim() != " ") {
-    fetchCountries(e.target.value.trim());
+    fetchCountries(e.target.value.trim())
     .then (renderHTML)
       .catch(error => {
         Notify.failure('Oops, there is no country with that name');
@@ -30,4 +30,17 @@ function onInputChange() {
   divEl.innerHTML = ' ';
 }
 
-function renderHTML(coutreis)
+function renderHTML(coutry) {
+  if (coutry > 10) {
+    Notiflix.Notify.info(
+      'Too many matches found. Please enter a more specific name.'
+    );
+  }
+  else if (coutry >= 2 && coutry <= 10) {
+  
+  }
+}
+// fields=name,capital,population,flags,languages`
+// більше ніж 10 країн
+// від 2 - х до 10 - и країн -прапора та назви країни
+// це масив з однією країною -прапор, назва, столиця, населення і мови
