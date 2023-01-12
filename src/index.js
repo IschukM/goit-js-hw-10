@@ -14,7 +14,7 @@ inputEl.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
 function onInputChange(e) {
   outputClear();
-  if (e.target.value.trim() != ' ') {
+  if (e.target.value.trim() != '') {
     fetchCountries(e.target.value.trim())
       .then(renderHTML)
       .catch(error => {
@@ -24,18 +24,19 @@ function onInputChange(e) {
   }
 }
 
-function onInputChange() {
-  listEl.innerHTML = ' ';
-  divEl.innerHTML = ' ';
+function outputClear() {
+  listEl.innerHTML = '';
+  divEl.innerHTML = '';
 }
 
 function renderHTML(country) {
-  if (country > 10) {
+  if (country.lenght > 10) {
     Notiflix.Notify.info(
       'Too many matches found. Please enter a more specific name.'
     );
-  } else if (country >= 2 && country <= 10) {
+  } else if (country.lenght >= 2 && country.lenght <= 10) {
     renderCountriesList(country);
+  } else if (country.lenght === 1) {
   }
 }
 // fields=name,capital,population,flags,languages`
@@ -54,3 +55,15 @@ function renderCountriesList(countriesArr) {
     .join('');
   listEl.insertAdjacentHTML('beforeend', markupList);
 }
+
+// function renderCountriesCard(country) {
+//   const markupCard = country
+//     .map(({ flags, name, population, flags, languages }) => {
+//       return `<li>
+//         <img src="${flags.svg}" width="50px">
+//         <p>${name.official}</p>
+//         </li>`;
+//     })
+//     .join('');
+//   listEl.insertAdjacentHTML('beforeend', markupList);
+// }
