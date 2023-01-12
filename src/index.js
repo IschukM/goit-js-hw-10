@@ -26,7 +26,7 @@ function onInputChange(e) {
 
 function outputClear() {
   listEl.innerHTML = '';
-  divEl.innerHTML = '';
+  // divEl.innerHTML = '';
 }
 
 function renderHTML(country) {
@@ -34,9 +34,9 @@ function renderHTML(country) {
     Notiflix.Notify.info(
       'Too many matches found. Please enter a more specific name.'
     );
-  } else if (country.lenght >= 2 && country.lenght <= 10) {
+  } else if (country.length >= 2 && country.length <= 10) {
     renderCountriesList(country);
-  } else if (country.lenght === 1) {
+  } else if (country.length === 1) {
   }
 }
 // fields=name,capital,population,flags,languages`
