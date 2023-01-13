@@ -8,7 +8,7 @@ const DEBOUNCE_DELAY = 300;
 
 const inputEl = document.querySelector('#search-box');
 const listEl = document.querySelector('.country-list');
-const divEl = document.querySelector('country-info');
+const divEl = document.querySelector('.country-info');
 
 inputEl.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
@@ -26,7 +26,7 @@ function onInputChange(e) {
 
 function outputClear() {
   listEl.innerHTML = '';
-  // divEl.innerHTML = '';
+  divEl.innerHTML = '';
 }
 
 function renderHTML(country) {
@@ -37,6 +37,7 @@ function renderHTML(country) {
   } else if (country.length >= 2 && country.length <= 10) {
     renderCountriesList(country);
   } else if (country.length === 1) {
+    renderCountryCard(country);
   }
 }
 // fields=name,capital,population,flags,languages`
@@ -45,7 +46,7 @@ function renderHTML(country) {
 // це масив з однією країною -прапор, назва, столиця, населення і мови
 
 function renderCountriesList(countriesArr) {
-  const markupList = countriesArr
+  const markup = countriesArr
     .map(({ flags, name }) => {
       return `<li>
         <img src="${flags.svg}" width="50px">
@@ -53,17 +54,22 @@ function renderCountriesList(countriesArr) {
         </li>`;
     })
     .join('');
-  listEl.insertAdjacentHTML('beforeend', markupList);
+  listEl.insertAdjacentHTML('beforeend', markup);
 }
 
-// function renderCountriesCard(country) {
-//   const markupCard = country
-//     .map(({ flags, name, population, flags, languages }) => {
-//       return `<li>
-//         <img src="${flags.svg}" width="50px">
-//         <p>${name.official}</p>
-//         </li>`;
-//     })
-//     .join('');
-//   listEl.insertAdjacentHTML('beforeend', markupList);
-// }
+function renderCountryCard(country) {
+  const markup = country
+    .map(({ flags, name, capital, population, languages }) => {
+      return `<div><img src="${flags.svg}" width="150px">
+        <p class="main-text">${name.official}<p></div>
+        <p class="text"><span class="main-text">Capital:  </span> ${capital}</p>
+        <p class="text"><span class="main-text">Population:  </span> ${
+          population / 1000000
+        } million people</p>
+        <p class="text"><span class="main-text">Languages:  </span> ${Object.values(
+          languages
+        ).join(', ')}</p>`;
+    })
+    .join('');
+  divEl.insertAdjacentHTML('beforeend', markup);
+}
