@@ -40,10 +40,6 @@ function renderHTML(country) {
     renderCountryCard(country);
   }
 }
-// fields=name,capital,population,flags,languages`
-// більше ніж 10 країн
-// від 2 - х до 10 - и країн -прапора та назви країни
-// це масив з однією країною -прапор, назва, столиця, населення і мови
 
 function renderCountriesList(countriesArr) {
   const markup = countriesArr
